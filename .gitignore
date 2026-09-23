@@ -1,0 +1,11 @@
+# Ignore environment variables
+app/.env
+.env
+
+# Ignore IDE / Editor folders
+.vscode/
+.idea/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+Options -Indexes
+
+# Deny access to sensitive files
+<FilesMatch "\.(sql|md|log|ini|env)$">
+  Require all denied
+</FilesMatch>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-XSS-Protection "1; mode=block"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
