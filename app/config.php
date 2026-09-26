@@ -13,11 +13,11 @@ if (file_exists($envFile)) {
     }
 }
 
-const DB_HOST = $_ENV['DB_HOST'] ?? '127.0.0.1';
-const DB_NAME = $_ENV['DB_NAME'] ?? 'bright_care_clinic';
-const DB_USER = $_ENV['DB_USER'] ?? 'root';
-const DB_PASS = $_ENV['DB_PASS'] ?? '';
-const APP_ENV = $_ENV['APP_ENV'] ?? 'production';
+define('DB_HOST', $_ENV['DB_HOST'] ?? '127.0.0.1');
+define('DB_NAME', $_ENV['DB_NAME'] ?? 'bright_care_clinic');
+define('DB_USER', $_ENV['DB_USER'] ?? 'root');
+define('DB_PASS', $_ENV['DB_PASS'] ?? '');
+define('APP_ENV', $_ENV['APP_ENV'] ?? 'production');
 
 function db(): PDO {
     static $pdo = null;

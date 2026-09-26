@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/config.php';
 require_role('admin'); $title='Doctor Management'; $pdo=db();
 if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf(); $name=post('full_name');$email=strtolower(post('email'));$gender=post('gender');$phone=post('phone');$spec=post('specialization');$pass=(string)($_POST['password']??'');
 if(!$name||!filter_var($email,FILTER_VALIDATE_EMAIL)||!$phone||!$spec||strlen($pass)<8){flash('error','Complete all fields; password must be at least 8 characters.');redirect('doctors.php');}

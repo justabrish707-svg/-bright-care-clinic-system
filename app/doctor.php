@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/config.php';
 require_role('doctor'); $title='Doctor Dashboard'; $pdo=db();
 $uid=(int)auth()['id']; $s=$pdo->prepare("SELECT id FROM doctors WHERE user_id=?");$s->execute([$uid]);$doctorId=$s->fetchColumn();
 $st=$pdo->prepare("SELECT COUNT(*) FROM appointments WHERE doctor_id=? AND appointment_date=CURDATE()");$st->execute([$doctorId]);$today=$st->fetchColumn();

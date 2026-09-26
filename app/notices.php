@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/config.php';
 require_login();$title='Noticeboard';$pdo=db();
 if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$titleN=post('title');$content=post('content');$expiry=post('expiry_date')?:null;$id=(int)($_POST['id']??0);if(!$titleN||!$content){flash('error','Title and content are required.');redirect('notices.php');}if($id){$s=$pdo->prepare("UPDATE notices SET title=?,content=?,expiry_date=? WHERE id=?");$s->execute([$titleN,$content,$expiry,$id]);}else{$s=$pdo->prepare("INSERT INTO notices(title,content,expiry_date,created_by) VALUES(?,?,?,?)");$s->execute([$titleN,$content,$expiry,auth()['id']]);}flash('success','Notice saved.');redirect('notices.php');}
 if(isset($_GET['delete']) && auth()['role']==='admin'){$s=$pdo->prepare("DELETE FROM notices WHERE id=?");$s->execute([(int)$_GET['delete']]);flash('success','Notice deleted.');redirect('notices.php');}

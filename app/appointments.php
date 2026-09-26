@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/config.php';
 require_login();$title='Appointments';$pdo=db();$u=auth();
 if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$pid=(int)$_POST['patient_id'];$did=$u['role']==='doctor'?(int)$pdo->query("SELECT id FROM doctors WHERE user_id=".(int)$u['id'])->fetchColumn():(int)$_POST['doctor_id'];$date=post('appointment_date');$time=post('appointment_time');$reason=post('reason');
 if(!$pid||!$did||!$date||!$time){flash('error','Patient, doctor, date and time are required.');redirect('appointments.php');}

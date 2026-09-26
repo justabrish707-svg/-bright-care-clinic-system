@@ -80,9 +80,11 @@ CREATE TABLE notices (
 ) ENGINE=InnoDB;
 
 -- Demo users. Password hashes are generated for the documented demo passwords.
+-- Admin@123  → $2y$10$YxZbzIw6bwGZUKj0g78fHemqovEyKdIQIYvGx2FZRfCpuBjuCTBz.
+-- Doctor@123 → $2y$10$4GEvkFew6XVKefkGABHqmeArtbdLTiKEa9KgSTWERJbccNAhsfOti
 INSERT INTO users (full_name,email,password_hash,role,phone) VALUES
-('System Administrator','admin@brightcare.local','$2y$10$5QpW8l6XkGm2mJ0a9vZq1u1Q0YlH3Y7V0Yq9z4F7h6JmP5gT8sX2a','admin','0911000000'),
-('Dr. Samuel Bekele','doctor@brightcare.local','$2y$10$2o4Lw8oJ8o6J7jQ7rQ8f7eR9o4d0kGmW8sQ2uB9dR3vH1tA6xP4i','doctor','0911000001');
+('System Administrator','admin@brightcare.local','$2y$10$YxZbzIw6bwGZUKj0g78fHemqovEyKdIQIYvGx2FZRfCpuBjuCTBz.','admin','0911000000'),
+('Dr. Samuel Bekele','doctor@brightcare.local','$2y$10$4GEvkFew6XVKefkGABHqmeArtbdLTiKEa9KgSTWERJbccNAhsfOti','doctor','0911000001');
 
 INSERT INTO doctors (user_id,gender,phone,specialization)
 SELECT id,'Male','0911000001','General Medicine'

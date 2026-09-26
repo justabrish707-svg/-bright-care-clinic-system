@@ -1,6 +1,7 @@
 <?php
+require_once __DIR__.'/config.php';
 require_login(); $title='Patient Management';$pdo=db();$u=auth();
-if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$id=(int)($_POST['id']??0);$name=post('full_name');$gender=post('gender');$dob=post('date_of_birth')?:null;$phone=post('phone');$address=post('address');$ec=post('emergency_contact');$ep=post('emergency_phone');$doctorId=$u['role']==='doctor'?(int)$pdo->query("SELECT id FROM doctors WHERE user_id=".(int)$u['id'])->fetchColumn():(int)($_POST['doctor_id']??0)?:null;
+if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$id=(int)($_POST['id']??0);$name=post('full_name');$gender=post('gender');$dob=post('date_of_birth')?:null;$phone=post('phone');$address=post('address');$ec=post('emergency_contact');$ep=post('emergency_phone');$_rawDid=(int)($_POST['doctor_id']??0);$doctorId=$u['role']==='doctor'?(int)$pdo->query("SELECT id FROM doctors WHERE user_id=".(int)$u['id'])->fetchColumn():($_rawDid?:null);
 if(!$name||!$phone){flash('error','Full name and phone are required.');redirect('patients.php');}
 if($id){$s=$pdo->prepare("UPDATE patients SET full_name=?,gender=?,date_of_birth=?,phone=?,address=?,emergency_contact=?,emergency_phone=?,doctor_id=? WHERE id=?");$s->execute([$name,$gender,$dob,$phone,$address,$ec,$ep,$doctorId,$id]);flash('success','Patient updated.');}else{$s=$pdo->prepare("INSERT INTO patients(doctor_id,full_name,gender,date_of_birth,phone,address,emergency_contact,emergency_phone) VALUES(?,?,?,?,?,?,?,?)");$s->execute([$doctorId,$name,$gender,$dob,$phone,$address,$ec,$ep]);flash('success','Patient registered.');}redirect('patients.php');}
 $doctors=$pdo->query("SELECT d.id,u.full_name FROM doctors d JOIN users u ON u.id=d.user_id ORDER BY u.full_name")->fetchAll();

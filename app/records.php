@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__.'/config.php';
 require_role('doctor');$title='Medical Records';$pdo=db();$uid=(int)auth()['id'];$d=$pdo->prepare("SELECT id FROM doctors WHERE user_id=?");$d->execute([$uid]);$did=(int)$d->fetchColumn();
 if($_SERVER['REQUEST_METHOD']==='POST'){check_csrf();$pid=(int)$_POST['patient_id'];$diagnosis=post('diagnosis');$treatment=post('treatment');$notes=post('notes');if(!$pid||!$diagnosis||!$treatment){flash('error','Patient, diagnosis and treatment are required.');redirect('records.php');}$s=$pdo->prepare("INSERT INTO medical_records(patient_id,doctor_id,diagnosis,treatment,notes) VALUES(?,?,?,?,?)");$s->execute([$pid,$did,$diagnosis,$treatment,$notes]);flash('success','Medical record saved.');redirect('records.php');}
 $s=$pdo->prepare("SELECT id,full_name FROM patients WHERE doctor_id=? ORDER BY full_name");$s->execute([$did]);$patients=$s->fetchAll();
