@@ -18,11 +18,20 @@ A PHP + MySQL clinic management system built to satisfy the Addis Ababa Labor an
 - Validation and useful HTTP status codes
 - Relational database with foreign keys, indexes and constraints
 
-## XAMPP installation
+## Installation
+
+### Option A: XAMPP deployment (Standard)
 1. Install XAMPP and start Apache + MySQL.
-2. Copy the `app` folder to `C:\xampp\htdocs\bright-care` (Windows) or `/opt/lampp/htdocs/bright-care` (Linux).
+2. Copy the contents of the `app` folder (and `.env`) to `C:\xampp\htdocs\bright-care`.
 3. Open phpMyAdmin and import `database/bright_care.sql`.
 4. Open `http://localhost/bright-care/login.php`.
+
+### Option B: PHP Built-in Server (Development)
+1. Start MySQL in XAMPP.
+2. Open phpMyAdmin and import `database/bright_care.sql`.
+3. Open your terminal in the `app/` folder.
+4. Run `php -S localhost:8000`.
+5. Open `http://localhost:8000/login.php`.
 5. Demo accounts:
    - Admin: `admin@brightcare.local` / `Admin@123`
    - Doctor: `doctor@brightcare.local` / `Doctor@123`

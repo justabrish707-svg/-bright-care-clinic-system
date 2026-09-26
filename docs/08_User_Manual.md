@@ -3,8 +3,19 @@
 ## 1. Introduction
 The Bright Care Clinic Management System replaces manual clinic workflows with a web-based system for authorized administrators and doctors.
 
-## 2. Requirements
+## 2. Requirements & Installation
 Run the system on a computer with XAMPP (Apache, PHP and MySQL/MariaDB), a modern browser and at least 4 GB RAM.
+
+**Option A: XAMPP Deployment**
+1. Copy the `app/` folder contents and `config.php` to your `htdocs` folder.
+2. Start Apache and MySQL in XAMPP.
+3. Access via `http://localhost/login.php`.
+
+**Option B: PHP Built-in Server (Development)**
+1. Start MySQL in XAMPP.
+2. Open your terminal in the `app/` directory.
+3. Run `php -S localhost:8000`.
+4. Access via `http://localhost:8000/login.php`.
 
 ## 3. Administrator Dashboard
 Administrators can:
